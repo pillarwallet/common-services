@@ -1,0 +1,59 @@
+{
+  "name": "@pillarwallet/common-services",
+  "version": "1.0.0",
+  "description": "A module that provides access to common services.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test:unit": "jest unit",
+    "test:integration": "jest integration",
+    "test": "npm run lint && npm run test:unit",
+    "precommit": "npm test",
+    "generateReadme": "echo \"\" > README.md && jsdoc2md lib/**/* --template templates/README.hbs > README.md"
+  },
+  "publishConfig": {
+    "registry": "https://pillarproject.jfrog.io/pillarproject/api/npm/npm/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://iamkio@github.com/pillarwallet/common-services.git"
+  },
+  "author": "Pillar Project team <info@pillarproject.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pillarwallet/common-services/issues"
+  },
+  "homepage": "https://github.com/pillarwallet/common-services#readme",
+  "dependencies": {
+    "@pillarwallet/common-logger": "^1.2.51",
+    "@pillarwallet/common-models": "^1.11.95",
+    "bunyan": "1.8.12",
+    "bunyan-rotating-file-stream": "1.6.3",
+    "ethers": "^4.0.23",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.0.18",
+    "path": "0.12.7",
+    "response-time": "2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "5.4.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jest": "21.17.0",
+    "eslint-plugin-prettier": "2.6.1",
+    "express": "4.16.4",
+    "husky": "0.14.3",
+    "jest": "22.4.4",
+    "rimraf": "2.6.2",
+    "jest-cli": "22.4.4",
+    "jsdoc-to-markdown": "4.0.1",
+    "prettier": "1.13.7",
+    "read-last-lines": "1.6.0",
+    "supertest": "3.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
