@@ -27,7 +27,7 @@
   "homepage": "https://github.com/pillarwallet/common-services#readme",
   "dependencies": {
     "@pillarwallet/common-logger": "^1.2.57",
-    "@pillarwallet/common-models": "^1.13.118",
+    "@pillarwallet/common-models": "^1.13.127",
     "bunyan": "1.8.12",
     "bunyan-rotating-file-stream": "1.6.3",
     "ethers": "^4.0.23",
