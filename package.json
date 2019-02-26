@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://iamkio@github.com/pillarwallet/common-services.git"
+    "url": "git@github.com:pillarwallet/common-services.git"
   },
   "author": "Pillar Project team <info@pillarproject.io>",
   "license": "ISC",
@@ -54,6 +54,7 @@
     "supertest": "3.3.0"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./utilities/jestSetup.js"
   }
 }
