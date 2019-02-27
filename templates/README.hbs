@@ -7,3 +7,25 @@ Run `npm run generateReadme` to parse the code for JSDoc comment blocks and recr
 ## Install
 Run `npm i @pillarwallet/common-services`
 
+## Examples
+Instantiate a badges service: <br />
+@param - (required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
+@param - (required) Smart contract address<br />
+@param - (required) Private key to operate with the contract<br />
+@param - (optional) Specify the file path to which log records are written<br />
+@param - (optional - default false). Set true to enable logging to a file and file rotation<br />
+
+```javascript
+const { buildBadgeService } = require('@pillarwallet/common-services');
+
+const BadgeService = buildBadgeService({
+  networkProvider: 'ropsten',
+  smartContractAddress: '0x...',
+  privateKey: '',
+});
+const tx = await BadgeService.mintBadge();
+
+# API
+
+{{>main}}
+
