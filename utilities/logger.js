@@ -22,9 +22,11 @@ SOFTWARE.
 const loggerConstructor = require('@pillarwallet/common-logger');
 const packageJson = require('../package.json');
 
-const logger = loggerConstructor({
-  name: packageJson.name,
-  logToFile: false,
-});
-
-module.exports = logger;
+module.exports = ({ path = '', logToFile = false }) => {
+  const logger = loggerConstructor({
+    name: packageJson.name,
+    path,
+    logToFile,
+  });
+  return logger;
+};
