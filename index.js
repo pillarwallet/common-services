@@ -22,5 +22,5 @@ SOFTWARE.
 const BadgeService = require('./lib/badges');
 
 module.exports = {
-  BadgeService,
+  buildBadgeService: BadgeService,
 };
