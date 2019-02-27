@@ -19,28 +19,78 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-const BadgeService = require('../../lib/badges');
+const buildBadgeService = require('../../lib/badges');
 
 const successfulTxHash = '0x1234556';
 const pendingTxHash = '0xpending';
 const failedTxHash = '0xfailed';
 
 describe('Badges Service', () => {
-  describe('checkTxStatus', () => {
+  it('should return the BadgeService instance', () => {
+    const BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+
+    expect(typeof BadgeService.onUserRegistered).toBe('function');
+    expect(typeof BadgeService.onWalletImported).toBe('function');
+    expect(typeof BadgeService.onConnectionEstablished).toBe('function');
+    expect(typeof BadgeService.selfAward).toBe('function');
+    expect(typeof BadgeService.checkTxStatus).toBe('function');
+    expect(typeof BadgeService.mintBadge).toBe('function');
+    expect(typeof BadgeService.awardBadge).toBe('function');
+    expect(typeof BadgeService.massBadgeAward).toBe('function');
+  });
+
+  it('should fail on invalid params', () => {
+    expect(() => buildBadgeService({ networkProvider: 'ropsten' })).toThrowError(
+      new TypeError('smartContractAddress is not set'),
+    );
+    expect(() => buildBadgeService({ smartContractAddress: '0x123' })).toThrowError(
+      new TypeError('networkProvider is not set'),
+    );
+  });
+
+  describe('checkTxStatus()', () => {
+    let BadgeService;
+
+    beforeEach(() => {
+      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+    });
+
     it('should return tx status as `confirmed` for successful transaction', async () => {
       const expectedStatus = 'confirmed';
       const txStatus = await BadgeService.checkTxStatus(successfulTxHash);
       return expect(txStatus).toEqual(expectedStatus);
     });
+
     it('should return tx status as `pending` for pending transaction', async () => {
       const expectedStatus = 'pending';
       const txStatus = await BadgeService.checkTxStatus(pendingTxHash);
       expect(txStatus).toEqual(expectedStatus);
     });
+
     it('should return tx status as `failed` for unsuccessful transaction', async () => {
       const expectedStatus = 'failed';
       const txStatus = await BadgeService.checkTxStatus(failedTxHash);
       expect(txStatus).toEqual(expectedStatus);
+    });
+  });
+
+  describe('awardBadge()', () => {
+    let BadgeService;
+
+    it('should fail without passing the private key', async () => {
+      expect.assertions(1);
+      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+      await expect(BadgeService.awardBadge()).rejects.toEqual(new Error('privateKey is not set'));
+    });
+  });
+
+  describe('massBadgeAward()', () => {
+    let BadgeService;
+
+    it('should fail without passing the private key', async () => {
+      expect.assertions(1);
+      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+      await expect(BadgeService.massBadgeAward()).rejects.toEqual(new Error('privateKey is not set'));
     });
   });
 });
