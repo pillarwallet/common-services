@@ -12,4 +12,11 @@ jest.setMock('ethers', {
       },
     }),
   },
+  Contract: () => ({
+    connect: () => ({
+      awardToken: () => Promise.resolve({ hash: '1234' }),
+      batchAwardToken: () => Promise.resolve({ hash: '1234' }),
+    }),
+  }),
+  Wallet: () => ({}),
 });
