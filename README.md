@@ -22,6 +22,8 @@ const BadgeService = buildBadgeService({
   networkProvider: 'ropsten',
   smartContractAddress: '0x...',
   privateKey: '',
+  loggerPath: '',
+  logToFile: false,
 });
 const tx = await BadgeService.mintBadge();
 
