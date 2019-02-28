@@ -20,11 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 const loggerConstructor = require('@pillarwallet/common-logger');
-const packageJson = require('../package.json');
 
 module.exports = ({ path = '', logToFile = false }) => {
   const logger = loggerConstructor({
-    name: packageJson.name,
+    name: 'common-services',
     path,
     logToFile,
   });
