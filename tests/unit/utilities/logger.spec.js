@@ -5,7 +5,7 @@ jest.mock('@pillarwallet/common-logger', () => jest.fn().mockImplementation(logg
 
 const loggerInstance = {
   logToFile: false,
-  name: '@pillarwallet/common-services',
+  name: 'common-services',
   path: '',
 };
 
