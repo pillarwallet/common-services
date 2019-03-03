@@ -9,13 +9,15 @@ Run `npm i @pillarwallet/common-services`
 
 ## Examples
 Instantiate a badges service: <br />
-@param - (required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
-@param - (required) Smart contract address<br />
-@param - (required) Private key to operate with the contract<br />
-@param - (optional) Specify the file path to which log records are written<br />
-@param - (optional - default false). Set true to enable logging to a file and file rotation<br />
+@param - (networkProvider - required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
+@param - (smartContractAddress - required) Smart contract address<br />
+@param - (privateKey - required) Private key to operate with the contract<br />
+@param - (loggerPath - optional) Specify the file path to which log records are written<br />
+@param - (logToFile - optional - default false). Set true to enable logging to a file and file rotation<br />
+@param - (dbModels - optional) Pass the Badge and BadgeAward mongoose objects (need for the backend integration)<br />
 
 ```javascript
+const { Badge, BadgeAward } = require('@pillarwallet/common-models').platform;
 const { buildBadgeService } = require('@pillarwallet/common-services');
 
 const BadgeService = buildBadgeService({
@@ -24,6 +26,7 @@ const BadgeService = buildBadgeService({
   privateKey: '',
   loggerPath: '',
   logToFile: false,
+  dbModels: { Badge, BadgeAward },
 });
 const tx = await BadgeService.mintBadge();
 
