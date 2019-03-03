@@ -51,6 +51,12 @@ It allows to set the Configuration keys:</p>
 <dt><a href="#onConnectionEstablished">onConnectionEstablished</a> ⇒</dt>
 <dd><p>Method that awards user with a badge for the first connection</p>
 </dd>
+<dt><a href="#onFirstTransactionMade">onFirstTransactionMade</a> ⇒</dt>
+<dd><p>Method that awards user with a badge for the first transaction made</p>
+</dd>
+<dt><a href="#onFirstTransactionReceived">onFirstTransactionReceived</a> ⇒</dt>
+<dd><p>Method that awards user with a badge for the first transaction received</p>
+</dd>
 <dt><a href="#selfAward">selfAward</a> ⇒</dt>
 <dd><p>Method to award yourself with a badge</p>
 </dd>
@@ -137,6 +143,34 @@ Method that awards user with a badge for the imported wallet
 
 ## onConnectionEstablished ⇒
 Method that awards user with a badge for the first connection
+
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [walletId] | <code>String</code> | Wallet ID |
+| [userId] | <code>String</code> | User ID |
+| [ethAddress] | <code>String</code> | User's Ethereum address |
+
+<a name="onFirstTransactionMade"></a>
+
+## onFirstTransactionMade ⇒
+Method that awards user with a badge for the first transaction made
+
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [walletId] | <code>String</code> | Wallet ID |
+| [userId] | <code>String</code> | User ID |
+| [ethAddress] | <code>String</code> | User's Ethereum address |
+
+<a name="onFirstTransactionReceived"></a>
+
+## onFirstTransactionReceived ⇒
+Method that awards user with a badge for the first transaction received
 
 **Kind**: global variable  
 **Returns**: Promise<MongoDBObject>  
