@@ -9,13 +9,15 @@ Run `npm i @pillarwallet/common-services`
 
 ## Examples
 Instantiate a badges service: <br />
-@param - (required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
-@param - (required) Smart contract address<br />
-@param - (required) Private key to operate with the contract<br />
-@param - (optional) Specify the file path to which log records are written<br />
-@param - (optional - default false). Set true to enable logging to a file and file rotation<br />
+@param - (networkProvider - required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
+@param - (smartContractAddress - required) Smart contract address<br />
+@param - (privateKey - required) Private key to operate with the contract<br />
+@param - (loggerPath - optional) Specify the file path to which log records are written<br />
+@param - (logToFile - optional - default false). Set true to enable logging to a file and file rotation<br />
+@param - (dbModels - optional) Pass the Badge and BadgeAward mongoose objects (need for the backend integration)<br />
 
 ```javascript
+const { Badge, BadgeAward } = require('@pillarwallet/common-models').platform;
 const { buildBadgeService } = require('@pillarwallet/common-services');
 
 const BadgeService = buildBadgeService({
@@ -24,6 +26,7 @@ const BadgeService = buildBadgeService({
   privateKey: '',
   loggerPath: '',
   logToFile: false,
+  dbModels: { Badge, BadgeAward },
 });
 const tx = await BadgeService.mintBadge();
 
@@ -51,10 +54,10 @@ It allows to set the Configuration keys:</p>
 <dt><a href="#onConnectionEstablished">onConnectionEstablished</a> ⇒</dt>
 <dd><p>Method that awards user with a badge for the first connection</p>
 </dd>
-<dt><a href="#onFirstTransactionMade">onFirstTransactionMade</a> ⇒</dt>
+<dt><a href="#onTransactionMade">onTransactionMade</a> ⇒</dt>
 <dd><p>Method that awards user with a badge for the first transaction made</p>
 </dd>
-<dt><a href="#onFirstTransactionReceived">onFirstTransactionReceived</a> ⇒</dt>
+<dt><a href="#onTransactionReceived">onTransactionReceived</a> ⇒</dt>
 <dd><p>Method that awards user with a badge for the first transaction received</p>
 </dd>
 <dt><a href="#selfAward">selfAward</a> ⇒</dt>
@@ -84,6 +87,7 @@ It allows to set the Configuration keys:
 | [privateKey] | <code>String</code> | Set the private key to operate with the contract |
 | [loggerPath] | <code>String</code> | Specify the file path to which log records are written |
 | [logToFile] | <code>Boolean</code> | Enables logging to a file and file rotation |
+| [dbModels] | <code>Object</code> | Pass the Badge and BadgeAward mongoose objects |
 
 <a name="awardBadge"></a>
 
@@ -153,9 +157,9 @@ Method that awards user with a badge for the first connection
 | [userId] | <code>String</code> | User ID |
 | [ethAddress] | <code>String</code> | User's Ethereum address |
 
-<a name="onFirstTransactionMade"></a>
+<a name="onTransactionMade"></a>
 
-## onFirstTransactionMade ⇒
+## onTransactionMade ⇒
 Method that awards user with a badge for the first transaction made
 
 **Kind**: global variable  
@@ -167,9 +171,9 @@ Method that awards user with a badge for the first transaction made
 | [userId] | <code>String</code> | User ID |
 | [ethAddress] | <code>String</code> | User's Ethereum address |
 
-<a name="onFirstTransactionReceived"></a>
+<a name="onTransactionReceived"></a>
 
-## onFirstTransactionReceived ⇒
+## onTransactionReceived ⇒
 Method that awards user with a badge for the first transaction received
 
 **Kind**: global variable  

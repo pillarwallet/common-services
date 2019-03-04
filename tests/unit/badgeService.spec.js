@@ -32,8 +32,8 @@ describe('Badges Service', () => {
     expect(typeof BadgeService.onUserRegistered).toBe('function');
     expect(typeof BadgeService.onWalletImported).toBe('function');
     expect(typeof BadgeService.onConnectionEstablished).toBe('function');
-    expect(typeof BadgeService.onFirstTransactionMade).toBe('function');
-    expect(typeof BadgeService.onFirstTransactionReceived).toBe('function');
+    expect(typeof BadgeService.onTransactionMade).toBe('function');
+    expect(typeof BadgeService.onTransactionReceived).toBe('function');
     expect(typeof BadgeService.selfAward).toBe('function');
     expect(typeof BadgeService.checkTxStatus).toBe('function');
     expect(typeof BadgeService.mintBadge).toBe('function');
