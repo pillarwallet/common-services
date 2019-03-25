@@ -25,9 +25,14 @@ const successfulTxHash = '0x1234556';
 const pendingTxHash = '0xpending';
 const failedTxHash = '0xfailed';
 
+const networkSettings = {
+  name: 'ropsten',
+  infuraProjectId: '123',
+};
+
 describe('Badges Service', () => {
   it('should return the BadgeService instance', () => {
-    const BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+    const BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
 
     expect(typeof BadgeService.onUserRegistered).toBe('function');
     expect(typeof BadgeService.onWalletImported).toBe('function');
@@ -42,11 +47,11 @@ describe('Badges Service', () => {
   });
 
   it('should fail on invalid params', () => {
-    expect(() => buildBadgeService({ networkProvider: 'ropsten' })).toThrowError(
+    expect(() => buildBadgeService({ network: networkSettings })).toThrowError(
       new TypeError('smartContractAddress is not set'),
     );
     expect(() => buildBadgeService({ smartContractAddress: '0x123' })).toThrowError(
-      new TypeError('networkProvider is not set'),
+      new TypeError('network name is not set'),
     );
   });
 
@@ -54,7 +59,7 @@ describe('Badges Service', () => {
     let BadgeService;
 
     beforeEach(() => {
-      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
     });
 
     it('should return tx status as `confirmed` for successful transaction', async () => {
@@ -81,7 +86,7 @@ describe('Badges Service', () => {
 
     it('should fail without passing the private key', async () => {
       expect.assertions(1);
-      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
       await expect(BadgeService.awardBadge()).rejects.toEqual(new Error('privateKey is not set'));
     });
   });
@@ -91,7 +96,7 @@ describe('Badges Service', () => {
 
     it('should fail without passing the private key', async () => {
       expect.assertions(1);
-      BadgeService = buildBadgeService({ networkProvider: 'ropsten', smartContractAddress: '0x123' });
+      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
       await expect(BadgeService.massBadgeAward()).rejects.toEqual(new Error('privateKey is not set'));
     });
   });
