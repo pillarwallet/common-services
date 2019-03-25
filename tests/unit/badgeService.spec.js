@@ -55,6 +55,14 @@ describe('Badges Service', () => {
     );
   });
 
+  it('should fail on missing infura project id', () => {
+    const BadgeService = buildBadgeService({
+      network: { ...networkSettings, infuraProjectId: '' },
+      smartContractAddress: '0x123',
+    });
+    expect(() => BadgeService.checkTxStatus(successfulTxHash)).toThrowError(new Error('infuraProjectId is not set'));
+  });
+
   describe('checkTxStatus()', () => {
     let BadgeService;
 
