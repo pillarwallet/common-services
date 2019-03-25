@@ -9,7 +9,8 @@ Run `npm i @pillarwallet/common-services`
 
 ## Examples
 Instantiate a badges service: <br />
-@param - (networkProvider - required) Network provider (mainnet, ropsten, localhost, docker-ganache)<br />
+@param - (network.name - required) Network provider (homestead, ropsten, localhost, docker-ganache)<br />
+@param - (network.infuraProjectId - required) Infura project ID<br />
 @param - (smartContractAddress - required) Smart contract address<br />
 @param - (privateKey - required) Private key to operate with the contract<br />
 @param - (loggerPath - optional) Specify the file path to which log records are written<br />
@@ -21,7 +22,10 @@ const { Badge, BadgeAward } = require('@pillarwallet/common-models').platform;
 const { buildBadgeService } = require('@pillarwallet/common-services');
 
 const BadgeService = buildBadgeService({
-  networkProvider: 'ropsten',
+  network: {
+    name: 'ropsten',
+    infuraProjectId: '',
+  },
   smartContractAddress: '0x...',
   privateKey: '',
   loggerPath: '',
@@ -82,7 +86,8 @@ It allows to set the Configuration keys:
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [networkProvider] | <code>String</code> | Set the network provider (mainnet, ropsten, localhost, docker-ganache) |
+| [networkName] | <code>String</code> | Set the network name (mainnet, ropsten, localhost, docker-ganache) |
+| [infuraProjectId] | <code>String</code> | Set the Infura project ID |
 | [smartContractAddress] | <code>String</code> | Set the smart contract address |
 | [privateKey] | <code>String</code> | Set the private key to operate with the contract |
 | [loggerPath] | <code>String</code> | Specify the file path to which log records are written |
