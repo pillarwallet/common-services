@@ -119,6 +119,7 @@ Award multiple ethereum addresses with a badge
 | --- | --- | --- |
 | [badgeEthereumId] | <code>Number</code> | Badge ID in the smart contract |
 | [usersEthereumAddresses] | <code>String</code> | Ethereum addresses to award |
+| [params] | <code>Object</code> | Additional transaction params (like nonce) |
 
 <a name="onUserRegistered"></a>
 

@@ -1,6 +1,6 @@
 {
   "name": "@pillarwallet/common-services",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A module that provides access to common services.",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,7 @@
     "response-time": "2.3.2"
   },
   "devDependencies": {
-    "eslint": "5.4.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.14.0",
@@ -44,16 +44,16 @@
     "eslint-plugin-prettier": "2.6.1",
     "express": "4.16.4",
     "husky": "0.14.3",
-    "jest": "22.4.4",
-    "rimraf": "2.6.2",
-    "jest-cli": "22.4.4",
-    "jsdoc-to-markdown": "4.0.1",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "jsdoc-to-markdown": "^5.0.0",
     "prettier": "1.13.7",
     "read-last-lines": "1.6.0",
+    "rimraf": "2.6.2",
     "supertest": "3.3.0"
   },
   "jest": {
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "./utilities/jestSetup.js"
+    "setupFilesAfterEnv": ["./utilities/jestSetup.js"]
   }
 }
