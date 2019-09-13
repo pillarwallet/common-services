@@ -1,6 +1,6 @@
 {
   "name": "@pillarwallet/common-services",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A module that provides access to common services.",
   "main": "index.js",
   "scripts": {
@@ -54,6 +54,8 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./utilities/jestSetup.js"]
+    "setupFilesAfterEnv": [
+      "./utilities/jestSetup.js"
+    ]
   }
 }
