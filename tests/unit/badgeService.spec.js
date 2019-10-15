@@ -21,91 +21,26 @@ SOFTWARE.
 */
 const buildBadgeService = require('../../lib/badges');
 
-const successfulTxHash = '0x1234556';
-const pendingTxHash = '0xpending';
-const failedTxHash = '0xfailed';
-
-const networkSettings = {
-  name: 'ropsten',
-  infuraProjectId: '123',
-};
+const Badge = jest.fn();
+const BadgeAward = jest.fn();
 
 describe('Badges Service', () => {
   it('should return the BadgeService instance', () => {
-    const BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
+    const BadgeService = buildBadgeService({ dbModels: { Badge, BadgeAward } });
 
     expect(typeof BadgeService.onUserRegistered).toBe('function');
     expect(typeof BadgeService.onWalletImported).toBe('function');
     expect(typeof BadgeService.onConnectionEstablished).toBe('function');
     expect(typeof BadgeService.onTransactionMade).toBe('function');
     expect(typeof BadgeService.onTransactionReceived).toBe('function');
-    expect(typeof BadgeService.selfAward).toBe('function');
-    expect(typeof BadgeService.checkTxStatus).toBe('function');
-    expect(typeof BadgeService.mintBadge).toBe('function');
-    expect(typeof BadgeService.awardBadge).toBe('function');
-    expect(typeof BadgeService.massBadgeAward).toBe('function');
   });
 
   it('should fail on invalid params', () => {
-    expect(() => buildBadgeService({ network: networkSettings })).toThrowError(
-      new TypeError('smartContractAddress is not set'),
+    expect(() => buildBadgeService({ dbModels: { BadgeAward } })).toThrowError(
+      new TypeError('Badge model is not provided'),
     );
-    expect(() => buildBadgeService({ smartContractAddress: '0x123' })).toThrowError(
-      new TypeError('network name is not set'),
+    expect(() => buildBadgeService({ dbModels: { Badge } })).toThrowError(
+      new TypeError('BadgeAward model is not provided'),
     );
-  });
-
-  it('should fail on missing infura project id', () => {
-    const BadgeService = buildBadgeService({
-      network: { ...networkSettings, infuraProjectId: '' },
-      smartContractAddress: '0x123',
-    });
-    expect(() => BadgeService.checkTxStatus(successfulTxHash)).toThrowError(new Error('infuraProjectId is not set'));
-  });
-
-  describe('checkTxStatus()', () => {
-    let BadgeService;
-
-    beforeEach(() => {
-      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
-    });
-
-    it('should return tx status as `confirmed` for successful transaction', async () => {
-      const expectedStatus = 'confirmed';
-      const txStatus = await BadgeService.checkTxStatus(successfulTxHash);
-      return expect(txStatus).toEqual(expectedStatus);
-    });
-
-    it('should return tx status as `pending` for pending transaction', async () => {
-      const expectedStatus = 'pending';
-      const txStatus = await BadgeService.checkTxStatus(pendingTxHash);
-      expect(txStatus).toEqual(expectedStatus);
-    });
-
-    it('should return tx status as `failed` for unsuccessful transaction', async () => {
-      const expectedStatus = 'failed';
-      const txStatus = await BadgeService.checkTxStatus(failedTxHash);
-      expect(txStatus).toEqual(expectedStatus);
-    });
-  });
-
-  describe('awardBadge()', () => {
-    let BadgeService;
-
-    it('should fail without passing the private key', async () => {
-      expect.assertions(1);
-      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
-      await expect(BadgeService.awardBadge()).rejects.toEqual(new Error('privateKey is not set'));
-    });
-  });
-
-  describe('massBadgeAward()', () => {
-    let BadgeService;
-
-    it('should fail without passing the private key', async () => {
-      expect.assertions(1);
-      BadgeService = buildBadgeService({ network: networkSettings, smartContractAddress: '0x123' });
-      await expect(BadgeService.massBadgeAward()).rejects.toEqual(new Error('privateKey is not set'));
-    });
   });
 });

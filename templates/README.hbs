@@ -9,10 +9,6 @@ Run `npm i @pillarwallet/common-services`
 
 ## Examples
 Instantiate a badges service: <br />
-@param - (network.name - required) Network provider (homestead, ropsten, localhost, docker-ganache)<br />
-@param - (network.infuraProjectId - required) Infura project ID<br />
-@param - (smartContractAddress - required) Smart contract address<br />
-@param - (privateKey - required) Private key to operate with the contract<br />
 @param - (loggerPath - optional) Specify the file path to which log records are written<br />
 @param - (logToFile - optional - default false). Set true to enable logging to a file and file rotation<br />
 @param - (dbModels - optional) Pass the Badge and BadgeAward mongoose objects (need for the backend integration)<br />
@@ -22,17 +18,10 @@ const { Badge, BadgeAward } = require('@pillarwallet/common-models').platform;
 const { buildBadgeService } = require('@pillarwallet/common-services');
 
 const BadgeService = buildBadgeService({
-  network: {
-    name: 'ropsten',
-    infuraProjectId: '',
-  },
-  smartContractAddress: '0x...',
-  privateKey: '',
   loggerPath: '',
   logToFile: false,
   dbModels: { Badge, BadgeAward },
 });
-const tx = await BadgeService.mintBadge();
 
 # API
 

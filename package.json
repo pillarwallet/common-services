@@ -1,6 +1,6 @@
 {
   "name": "@pillarwallet/common-services",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "A module that provides access to common services.",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,6 @@
     "@pillarwallet/common-logger": "^1.2.57",
     "bunyan": "1.8.12",
     "bunyan-rotating-file-stream": "1.6.3",
-    "ethers": "^4.0.23",
     "fs": "0.0.1-security",
     "mongoose": "^5.0.18",
     "path": "0.12.7",
@@ -53,9 +52,6 @@
     "supertest": "3.3.0"
   },
   "jest": {
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./utilities/jestSetup.js"
-    ]
+    "testEnvironment": "node"
   }
 }
