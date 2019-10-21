@@ -30,9 +30,9 @@ Instantiate a notification service: <br />
 
 ```javascript
 const config = require('../../src/config');
-const { buildNotificationsService } = require('@pillarwallet/common-services');
+const { buildNotificationService } = require('@pillarwallet/common-services');
 
-const notificationService = buildNotificationsService({
+const notificationService = buildNotificationService({
   mqConfiguration: config.get('mq.notifications'),
   pingMessage: true,
 });
