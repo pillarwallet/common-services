@@ -20,7 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 const BadgeService = require('./lib/badges');
+const NotificationService = require('./lib/notifications');
 
 module.exports = {
   buildBadgeService: BadgeService,
+  buildNotificationsService: NotificationService,
 };
