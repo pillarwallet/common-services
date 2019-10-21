@@ -1,6 +1,6 @@
 {
   "name": "@pillarwallet/common-services",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A module that provides access to common services.",
   "main": "index.js",
   "scripts": {
@@ -27,8 +27,10 @@
   "homepage": "https://github.com/pillarwallet/common-services#readme",
   "dependencies": {
     "@pillarwallet/common-logger": "^1.2.57",
+    "@pillarwallet/common-mq": "1.0.30",
     "bunyan": "1.8.12",
     "bunyan-rotating-file-stream": "1.6.3",
+    "cron": "1.3.0",
     "fs": "0.0.1-security",
     "mongoose": "^5.0.18",
     "path": "0.12.7",

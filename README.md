@@ -22,6 +22,21 @@ const BadgeService = buildBadgeService({
   logToFile: false,
   dbModels: { Badge, BadgeAward },
 });
+```
+
+Instantiate a notification service: <br />
+@param - (mqConfiguration - required) Pass the MQ configuration object<br />
+@param - (pingMessage - required) Flag that indicates if ping message to MQ is needed<br />
+
+```javascript
+const config = require('../../src/config');
+const { buildNotificationService } = require('@pillarwallet/common-services');
+
+const notificationService = buildNotificationService({
+  mqConfiguration: config.get('mq.notifications'),
+  pingMessage: true,
+});
+```
 
 # API
 
@@ -49,6 +64,40 @@ It allows to set the Configuration keys:</p>
 </dd>
 <dt><a href="#selfAward">selfAward</a> ⇒</dt>
 <dd><p>Method to award yourself with a badge</p>
+</dd>
+<dt><a href="#Constructor">Constructor</a> ⇒</dt>
+<dd><p>This is the constructor of the NotificationService instance.</p>
+</dd>
+<dt><a href="#connectToMq">connectToMq</a></dt>
+<dd><p>Set up connection to MQ, topic and events</p>
+</dd>
+<dt><a href="#pingMqConnect">pingMqConnect</a></dt>
+<dd><p>Set up connection to MQ, topic and events</p>
+</dd>
+<dt><a href="#pingMqMessage">pingMqMessage</a></dt>
+<dd><p>a small function that simply constructs the message
+to be pushed to the topic.</p>
+</dd>
+<dt><a href="#pushToTopic">pushToTopic</a></dt>
+<dd><p>Method to send a message to MQ</p>
+</dd>
+<dt><a href="#createBadgesNotification">createBadgesNotification</a></dt>
+<dd><p>Method that creates a Badge notification and put the message in MQ</p>
+</dd>
+<dt><a href="#onUserRegisteredBadgeNotification">onUserRegisteredBadgeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: wallet-created</p>
+</dd>
+<dt><a href="#onWalletImportedBadgeNotification">onWalletImportedBadgeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: wallet-imported</p>
+</dd>
+<dt><a href="#onConnectionEstablishedBadgeNotification">onConnectionEstablishedBadgeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-connection-established</p>
+</dd>
+<dt><a href="#onTransactionMadeBadgeNotification">onTransactionMadeBadgeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-transaction-made</p>
+</dd>
+<dt><a href="#onTransactionReceivedBadgeNotification">onTransactionReceivedBadgeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-transaction-received</p>
 </dd>
 </dl>
 
@@ -145,5 +194,114 @@ Method to award yourself with a badge
 | [badgeType] | <code>String</code> | Badge name |
 | [walletId] | <code>String</code> | Wallet ID |
 | [userId] | <code>String</code> | User ID |
+
+<a name="Constructor"></a>
+
+## Constructor ⇒
+This is the constructor of the NotificationService instance.
+
+**Kind**: global variable  
+**Returns**: Object<NotificationService>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [mqConfiguration] | <code>Object</code> | MQ configuration object |
+| [pingMessage] | <code>Boolean</code> | Flag that indicates if ping message to MQ is needed |
+
+<a name="connectToMq"></a>
+
+## connectToMq
+Set up connection to MQ, topic and events
+
+**Kind**: global variable  
+<a name="pingMqConnect"></a>
+
+## pingMqConnect
+Set up connection to MQ, topic and events
+
+**Kind**: global variable  
+<a name="pingMqMessage"></a>
+
+## pingMqMessage
+a small function that simply constructs the message
+to be pushed to the topic.
+
+**Kind**: global variable  
+<a name="pushToTopic"></a>
+
+## pushToTopic
+Method to send a message to MQ
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [message] | <code>Object</code> | The message object |
+
+<a name="createBadgesNotification"></a>
+
+## createBadgesNotification
+Method that creates a Badge notification and put the message in MQ
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onUserRegisteredBadgeNotification"></a>
+
+## onUserRegisteredBadgeNotification
+Method that creates badge notification with type: wallet-created
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onWalletImportedBadgeNotification"></a>
+
+## onWalletImportedBadgeNotification
+Method that creates badge notification with type: wallet-imported
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onConnectionEstablishedBadgeNotification"></a>
+
+## onConnectionEstablishedBadgeNotification
+Method that creates badge notification with type: first-connection-established
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onTransactionMadeBadgeNotification"></a>
+
+## onTransactionMadeBadgeNotification
+Method that creates badge notification with type: first-transaction-made
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onTransactionReceivedBadgeNotification"></a>
+
+## onTransactionReceivedBadgeNotification
+Method that creates badge notification with type: first-transaction-received
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
 
 

@@ -22,6 +22,21 @@ const BadgeService = buildBadgeService({
   logToFile: false,
   dbModels: { Badge, BadgeAward },
 });
+```
+
+Instantiate a notification service: <br />
+@param - (mqConfiguration - required) Pass the MQ configuration object<br />
+@param - (pingMessage - required) Flag that indicates if ping message to MQ is needed<br />
+
+```javascript
+const config = require('../../src/config');
+const { buildNotificationService } = require('@pillarwallet/common-services');
+
+const notificationService = buildNotificationService({
+  mqConfiguration: config.get('mq.notifications'),
+  pingMessage: true,
+});
+```
 
 # API
 
