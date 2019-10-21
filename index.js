@@ -24,5 +24,5 @@ const NotificationService = require('./lib/notifications');
 
 module.exports = {
   buildBadgeService: BadgeService,
-  buildNotificationsService: NotificationService,
+  buildNotificationService: NotificationService,
 };

@@ -84,6 +84,21 @@ to be pushed to the topic.</p>
 <dt><a href="#createBadgesNotification">createBadgesNotification</a></dt>
 <dd><p>Method that creates a Badge notification and put the message in MQ</p>
 </dd>
+<dt><a href="#onUserRegisteredNotification">onUserRegisteredNotification</a></dt>
+<dd><p>Method that creates badge notification with type: wallet-created</p>
+</dd>
+<dt><a href="#onWalletImportedNotification">onWalletImportedNotification</a></dt>
+<dd><p>Method that creates badge notification with type: wallet-imported</p>
+</dd>
+<dt><a href="#onConnectionEstablishedNotification">onConnectionEstablishedNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-connection-established</p>
+</dd>
+<dt><a href="#onTransactionMadeNotification">onTransactionMadeNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-transaction-made</p>
+</dd>
+<dt><a href="#onTransactionReceivedNotification">onTransactionReceivedNotification</a></dt>
+<dd><p>Method that creates badge notification with type: first-transaction-received</p>
+</dd>
 </dl>
 
 <a name="Constructor"></a>
@@ -227,6 +242,61 @@ Method to send a message to MQ
 
 ## createBadgesNotification
 Method that creates a Badge notification and put the message in MQ
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onUserRegisteredNotification"></a>
+
+## onUserRegisteredNotification
+Method that creates badge notification with type: wallet-created
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onWalletImportedNotification"></a>
+
+## onWalletImportedNotification
+Method that creates badge notification with type: wallet-imported
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onConnectionEstablishedNotification"></a>
+
+## onConnectionEstablishedNotification
+Method that creates badge notification with type: first-connection-established
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onTransactionMadeNotification"></a>
+
+## onTransactionMadeNotification
+Method that creates badge notification with type: first-transaction-made
+
+**Kind**: global variable  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [wallet] | <code>Object</code> | The wallet object from the recipient user |
+
+<a name="onTransactionReceivedNotification"></a>
+
+## onTransactionReceivedNotification
+Method that creates badge notification with type: first-transaction-received
 
 **Kind**: global variable  
 
