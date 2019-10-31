@@ -26,14 +26,17 @@ const BadgeService = buildBadgeService({
 
 Instantiate a notification service: <br />
 @param - (mqConfiguration - required) Pass the MQ configuration object<br />
+@param - (dbModels - optional) Pass the Badge mongoose object (need for the backend integration)<br />
 @param - (pingMessage - required) Flag that indicates if ping message to MQ is needed<br />
 
 ```javascript
 const config = require('../../src/config');
+const { Badge } = require('@pillarwallet/common-models').platform;
 const { buildNotificationService } = require('@pillarwallet/common-services');
 
 const notificationService = buildNotificationService({
   mqConfiguration: config.get('mq.notifications'),
+  dbModels: { Badge },
   pingMessage: true,
 });
 ```
@@ -206,6 +209,7 @@ This is the constructor of the NotificationService instance.
 | Param | Type | Description |
 | --- | --- | --- |
 | [mqConfiguration] | <code>Object</code> | MQ configuration object |
+| [dbModels] | <code>Object</code> | Pass the Badge mongoose object |
 | [pingMessage] | <code>Boolean</code> | Flag that indicates if ping message to MQ is needed |
 
 <a name="connectToMq"></a>
