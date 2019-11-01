@@ -36,6 +36,8 @@ describe('Notification Service', () => {
     payload: {},
   };
 
+  const Badge = jest.fn();
+
   beforeEach(() => {
     mqConfiguration = {
       topic: 'topic',
@@ -63,6 +65,7 @@ describe('Notification Service', () => {
   it('should return the Notification Service instance', () => {
     const NotificationService = buildNotificationService({
       mqConfiguration,
+      dbModels: { Badge },
       pingMessage: false,
     });
 
@@ -76,13 +79,19 @@ describe('Notification Service', () => {
   });
 
   it('should fail on invalid params', () => {
-    expect(() => buildNotificationService({ mqConfiguration: {}, pingMessage: false })).toThrowError(
+    expect(() => buildNotificationService({ mqConfiguration: {}, dbModels: {}, pingMessage: false })).toThrowError(
       new TypeError('Missing MQ configuration'),
     );
   });
 
+  it('should fail on invalid params, missing Badge model', () => {
+    expect(() => buildNotificationService({ mqConfiguration, dbModels: {}, pingMessage: false })).toThrowError(
+      new TypeError('Badge model is not provided'),
+    );
+  });
+
   it('should have called the node-cron scheduler function if pingMessage is true', async () => {
-    buildNotificationService({ mqConfiguration, pingMessage: true });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: true });
 
     expect(cron.CronJob).toHaveBeenCalledWith({
       cronTime: '* * * * *',
@@ -95,12 +104,12 @@ describe('Notification Service', () => {
   });
 
   it('should not have called the node-cron scheduler function if pingMessage is false', async () => {
-    buildNotificationService({ mqConfiguration, pingMessage: false });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: false });
     expect(cron.CronJob).not.toBeCalled();
   });
 
   it('should have instantiated a new MQ with the correct config options', () => {
-    buildNotificationService({ mqConfiguration, pingMessage: false });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: false });
 
     const amqpCallParameter1 = AMQP.mock.calls[0][0];
     const amqpCallParameter2 = AMQP.mock.calls[0][1];
@@ -127,7 +136,7 @@ describe('Notification Service', () => {
       frameMax: 1,
       heartbeat: 2,
     };
-    buildNotificationService({ mqConfiguration, pingMessage: false });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: false });
     const amqpCallParameter1 = AMQP.mock.calls[0][0];
     const amqpCallParameter2 = AMQP.mock.calls[0][1];
     const amqpCallParameter3 = AMQP.mock.calls[0][2];
@@ -141,7 +150,7 @@ describe('Notification Service', () => {
   });
 
   it('should have instantiated a new MQ with the correct config options, PING', () => {
-    buildNotificationService({ mqConfiguration, pingMessage: true });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: true });
     const amqpCallParameter1 = AMQP.mock.calls[1][0];
     const amqpCallParameter2 = AMQP.mock.calls[1][1];
     const amqpCallParameter3 = AMQP.mock.calls[1][2];
@@ -155,7 +164,7 @@ describe('Notification Service', () => {
   });
 
   it('should have called the node-cron scheduler function', async () => {
-    buildNotificationService({ mqConfiguration, pingMessage: true });
+    buildNotificationService({ mqConfiguration, dbModels: { Badge }, pingMessage: true });
     expect(cron.CronJob).toHaveBeenCalledWith({
       cronTime: '* * * * *',
       onTick: expect.any(Function),
