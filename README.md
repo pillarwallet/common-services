@@ -71,6 +71,9 @@ It allows to set the Configuration keys:</p>
 <dt><a href="#Constructor">Constructor</a> ⇒</dt>
 <dd><p>This is the constructor of the NotificationService instance.</p>
 </dd>
+<dt><a href="#retryMessage">retryMessage</a></dt>
+<dd><p>Method to log error and call method sendMessage if corresponds</p>
+</dd>
 <dt><a href="#sendMessage">sendMessage</a></dt>
 <dd><p>Method to send a message to SQS</p>
 </dd>
@@ -202,6 +205,12 @@ This is the constructor of the NotificationService instance.
 | [dbModels] | <code>Object</code> | Pass the Badge mongoose object |
 | [queueUrl] | <code>Boolean</code> | The destination queue url |
 
+<a name="retryMessage"></a>
+
+## retryMessage
+Method to log error and call method sendMessage if corresponds
+
+**Kind**: global variable  
 <a name="sendMessage"></a>
 
 ## sendMessage
@@ -212,6 +221,7 @@ Method to send a message to SQS
 | Param | Type | Description |
 | --- | --- | --- |
 | [message] | <code>Object</code> | The message object |
+| [retry] | <code>Boolean</code> | Flag to indicate if the method should send the message again if we have an error |
 
 <a name="createBadgesNotification"></a>
 
