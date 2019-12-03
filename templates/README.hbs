@@ -25,9 +25,9 @@ const BadgeService = buildBadgeService({
 ```
 
 Instantiate a notification service: <br />
-@param - (mqConfiguration - required) Pass the MQ configuration object<br />
+@param - (sqsConfiguration - required) Pass the SQS configuration object<br />
 @param - (dbModels - optional) Pass the Badge mongoose object (need for the backend integration)<br />
-@param - (pingMessage - required) Flag that indicates if ping message to MQ is needed<br />
+@param - (queueUrl - required) The destination queue url<br />
 
 ```javascript
 const config = require('../../src/config');
@@ -35,9 +35,9 @@ const { Badge } = require('@pillarwallet/common-models').platform;
 const { buildNotificationService } = require('@pillarwallet/common-services');
 
 const notificationService = buildNotificationService({
-  mqConfiguration: config.get('mq.notifications'),
+  sqsConfiguration: { region: 'us-east-1' },
   dbModels: { Badge },
-  pingMessage: true,
+  queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo',
 });
 ```
 

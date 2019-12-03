@@ -25,9 +25,9 @@ const BadgeService = buildBadgeService({
 ```
 
 Instantiate a notification service: <br />
-@param - (mqConfiguration - required) Pass the MQ configuration object<br />
+@param - (sqsConfiguration - required) Pass the SQS configuration object<br />
 @param - (dbModels - optional) Pass the Badge mongoose object (need for the backend integration)<br />
-@param - (pingMessage - required) Flag that indicates if ping message to MQ is needed<br />
+@param - (queueUrl - required) The destination queue url<br />
 
 ```javascript
 const config = require('../../src/config');
@@ -35,9 +35,9 @@ const { Badge } = require('@pillarwallet/common-models').platform;
 const { buildNotificationService } = require('@pillarwallet/common-services');
 
 const notificationService = buildNotificationService({
-  mqConfiguration: config.get('mq.notifications'),
+  sqsConfiguration: { region: 'us-east-1' },
   dbModels: { Badge },
-  pingMessage: true,
+  queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo',
 });
 ```
 
@@ -71,21 +71,14 @@ It allows to set the Configuration keys:</p>
 <dt><a href="#Constructor">Constructor</a> ⇒</dt>
 <dd><p>This is the constructor of the NotificationService instance.</p>
 </dd>
-<dt><a href="#connectToMq">connectToMq</a></dt>
-<dd><p>Set up connection to MQ, topic and events</p>
+<dt><a href="#retryMessage">retryMessage</a></dt>
+<dd><p>Method to log error and call method sendMessage if corresponds</p>
 </dd>
-<dt><a href="#pingMqConnect">pingMqConnect</a></dt>
-<dd><p>Set up connection to MQ, topic and events</p>
-</dd>
-<dt><a href="#pingMqMessage">pingMqMessage</a></dt>
-<dd><p>a small function that simply constructs the message
-to be pushed to the topic.</p>
-</dd>
-<dt><a href="#pushToTopic">pushToTopic</a></dt>
-<dd><p>Method to send a message to MQ</p>
+<dt><a href="#sendMessage">sendMessage</a></dt>
+<dd><p>Method to send a message to SQS</p>
 </dd>
 <dt><a href="#createBadgesNotification">createBadgesNotification</a></dt>
-<dd><p>Method that creates a Badge notification and put the message in MQ</p>
+<dd><p>Method that creates a Badge notification and put the message in SQS</p>
 </dd>
 <dt><a href="#onUserRegisteredBadgeNotification">onUserRegisteredBadgeNotification</a></dt>
 <dd><p>Method that creates badge notification with type: wallet-created</p>
@@ -208,44 +201,32 @@ This is the constructor of the NotificationService instance.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [mqConfiguration] | <code>Object</code> | MQ configuration object |
+| [sqsConfiguration] | <code>Object</code> | SQS configuration object |
 | [dbModels] | <code>Object</code> | Pass the Badge mongoose object |
-| [pingMessage] | <code>Boolean</code> | Flag that indicates if ping message to MQ is needed |
+| [queueUrl] | <code>Boolean</code> | The destination queue url |
 
-<a name="connectToMq"></a>
+<a name="retryMessage"></a>
 
-## connectToMq
-Set up connection to MQ, topic and events
-
-**Kind**: global variable  
-<a name="pingMqConnect"></a>
-
-## pingMqConnect
-Set up connection to MQ, topic and events
+## retryMessage
+Method to log error and call method sendMessage if corresponds
 
 **Kind**: global variable  
-<a name="pingMqMessage"></a>
+<a name="sendMessage"></a>
 
-## pingMqMessage
-a small function that simply constructs the message
-to be pushed to the topic.
-
-**Kind**: global variable  
-<a name="pushToTopic"></a>
-
-## pushToTopic
-Method to send a message to MQ
+## sendMessage
+Method to send a message to SQS
 
 **Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [message] | <code>Object</code> | The message object |
+| [retry] | <code>Boolean</code> | Flag to indicate if the method should send the message again if we have an error |
 
 <a name="createBadgesNotification"></a>
 
 ## createBadgesNotification
-Method that creates a Badge notification and put the message in MQ
+Method that creates a Badge notification and put the message in SQS
 
 **Kind**: global variable  
 
