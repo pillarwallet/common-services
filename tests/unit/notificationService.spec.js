@@ -32,7 +32,6 @@ jest.mock('@pillarwallet/common-mq');
 describe('Notification Service', () => {
   let mqConfiguration;
   let sqsConfiguration;
-  const queueUrl = 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo';
 
   const expectedPingMessage = {
     type: 'ping',
@@ -43,6 +42,7 @@ describe('Notification Service', () => {
   beforeEach(() => {
     sqsConfiguration = {
       region: 'us-east-1',
+      queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo',
     };
 
     mqConfiguration = {
@@ -69,14 +69,14 @@ describe('Notification Service', () => {
   });
 
   it('creates a new instance of aws.SQS', () => {
-    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {}, queueUrl, pingMessage: false });
+    buildNotificationService({ sqsConfiguration, dbModels: {}, pingMessage: false });
 
     expect(aws.SQS.mock.instances).toHaveLength(1);
   });
 
   it('should have instantiated a new aws.SQS with the correct config options', () => {
-    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {}, queueUrl, pingMessage: false });
-
+    buildNotificationService({ sqsConfiguration, dbModels: {}, pingMessage: false });
+    delete sqsConfiguration.queueUrl;
     expect(aws.SQS.mock.calls[0][0]).toEqual(sqsConfiguration);
   });
 
@@ -85,11 +85,11 @@ describe('Notification Service', () => {
       sqsConfiguration,
       mqConfiguration,
       dbModels: {},
-      queueUrl,
       pingMessage: false,
     });
 
     expect(typeof NotificationService.sendMessage).toBe('function');
+    expect(typeof NotificationService.pushToTopic).toBe('function');
     expect(typeof NotificationService.createBadgesNotification).toBe('function');
     expect(typeof NotificationService.onUserRegisteredBadgeNotification).toBe('function');
     expect(typeof NotificationService.onWalletImportedBadgeNotification).toBe('function');
@@ -99,7 +99,7 @@ describe('Notification Service', () => {
   });
 
   it('should have called the node-cron scheduler function if pingMessage is true', async () => {
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: true });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {}, pingMessage: true });
 
     expect(cron.CronJob).toHaveBeenCalledWith({
       cronTime: '* * * * *',
@@ -112,12 +112,12 @@ describe('Notification Service', () => {
   });
 
   it('should not have called the node-cron scheduler function if pingMessage is false', async () => {
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: false });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {} });
     expect(cron.CronJob).not.toBeCalled();
   });
 
   it('should have instantiated a new MQ with the correct config options', () => {
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: false });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {} });
 
     const amqpCallParameter1 = AMQP.mock.calls[0][0];
     const amqpCallParameter2 = AMQP.mock.calls[0][1];
@@ -144,7 +144,7 @@ describe('Notification Service', () => {
       frameMax: 1,
       heartbeat: 2,
     };
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: false });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {} });
     const amqpCallParameter1 = AMQP.mock.calls[0][0];
     const amqpCallParameter2 = AMQP.mock.calls[0][1];
     const amqpCallParameter3 = AMQP.mock.calls[0][2];
@@ -158,7 +158,7 @@ describe('Notification Service', () => {
   });
 
   it('should have instantiated a new MQ with the correct config options, PING', () => {
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: true });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {}, pingMessage: true });
     const amqpCallParameter1 = AMQP.mock.calls[1][0];
     const amqpCallParameter2 = AMQP.mock.calls[1][1];
     const amqpCallParameter3 = AMQP.mock.calls[1][2];
@@ -172,7 +172,7 @@ describe('Notification Service', () => {
   });
 
   it('should have called the node-cron scheduler function', async () => {
-    buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, queueUrl, pingMessage: true });
+    buildNotificationService({ sqsConfiguration, mqConfiguration, dbModels: {}, pingMessage: true });
     expect(cron.CronJob).toHaveBeenCalledWith({
       cronTime: '* * * * *',
       onTick: expect.any(Function),
@@ -197,14 +197,14 @@ describe('Notification Service', () => {
   });
 
   it('should fail on invalid params, queueUrl', () => {
-    expect(() =>
-      buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {}, pingMessage: false }),
-    ).toThrowError(new TypeError('Missing queue url'));
+    expect(() => buildNotificationService({ sqsConfiguration: {}, mqConfiguration, dbModels: {} })).toThrowError(
+      new TypeError('Missing queue url'),
+    );
   });
 
   it('should fail on invalid params, mqConfiguration', () => {
-    expect(() =>
-      buildNotificationService({ sqsConfiguration: {}, dbModels: {}, queueUrl, pingMessage: false }),
-    ).toThrowError(new TypeError('Missing MQ configuration'));
+    expect(() => buildNotificationService({ sqsConfiguration, mqConfiguration: {}, dbModels: {} })).toThrowError(
+      new TypeError('Missing MQ configuration'),
+    );
   });
 });
