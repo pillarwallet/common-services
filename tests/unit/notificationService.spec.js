@@ -24,7 +24,6 @@ const aws = require('aws-sdk');
 const buildNotificationService = require('../../lib/notifications');
 
 jest.mock('aws-sdk');
-jest.mock('@pillarwallet/common-mq');
 
 describe('Notification Service', () => {
   let sqsConfiguration;
