@@ -34,7 +34,7 @@ const { Badge } = require('@pillarwallet/common-models').platform;
 const { buildNotificationService } = require('@pillarwallet/common-services');
 
 const notificationService = buildNotificationService({
-  sqsConfiguration: { region: 'us-east-1', queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo' },
+  sqsConfiguration: { region: 'us-east-1', queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo', fifoQueue: true },
   dbModels: { Badge },
 });
 ```
@@ -69,6 +69,9 @@ It allows to set the Configuration keys:</p>
 <dt><a href="#Constructor">Constructor</a> ⇒</dt>
 <dd><p>This is the constructor of the NotificationService instance.</p>
 </dd>
+<dt><a href="#retryMessage">retryMessage</a></dt>
+<dd><p>Method to log error and call method sendMessage if corresponds</p>
+</dd>
 <dt><a href="#sendMessage">sendMessage</a></dt>
 <dd><p>Method to send a message to SQS</p>
 </dd>
@@ -98,8 +101,8 @@ It allows to set the Configuration keys:</p>
 This is the constructor of the BadgeService instance.
 It allows to set the Configuration keys:
 
-**Kind**: global variable
-**Returns**: Object<BadgeService>
+**Kind**: global variable  
+**Returns**: Object<BadgeService>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -112,8 +115,8 @@ It allows to set the Configuration keys:
 ## onUserRegistered ⇒
 Method that awards user with a badge for the registration
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -125,8 +128,8 @@ Method that awards user with a badge for the registration
 ## onWalletImported ⇒
 Method that awards user with a badge for the imported wallet
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -138,8 +141,8 @@ Method that awards user with a badge for the imported wallet
 ## onConnectionEstablished ⇒
 Method that awards user with a badge for the first connection
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -151,8 +154,8 @@ Method that awards user with a badge for the first connection
 ## onTransactionMade ⇒
 Method that awards user with a badge for the first transaction made
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -164,8 +167,8 @@ Method that awards user with a badge for the first transaction made
 ## onTransactionReceived ⇒
 Method that awards user with a badge for the first transaction received
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -177,8 +180,8 @@ Method that awards user with a badge for the first transaction received
 ## selfAward ⇒
 Method to award yourself with a badge
 
-**Kind**: global variable
-**Returns**: Promise<MongoDBObject>
+**Kind**: global variable  
+**Returns**: Promise<MongoDBObject>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -191,20 +194,26 @@ Method to award yourself with a badge
 ## Constructor ⇒
 This is the constructor of the NotificationService instance.
 
-**Kind**: global variable
-**Returns**: Object<NotificationService>
+**Kind**: global variable  
+**Returns**: Object<NotificationService>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [sqsConfiguration] | <code>Object</code> | SQS configuration object |
 | [dbModels] | <code>Object</code> | Pass the Badge mongoose object |
 
+<a name="retryMessage"></a>
+
+## retryMessage
+Method to log error and call method sendMessage if corresponds
+
+**Kind**: global variable  
 <a name="sendMessage"></a>
 
 ## sendMessage
 Method to send a message to SQS
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -215,7 +224,7 @@ Method to send a message to SQS
 ## createBadgesNotification
 Method that creates a Badge notification and put the message in SQS
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -226,7 +235,7 @@ Method that creates a Badge notification and put the message in SQS
 ## onUserRegisteredBadgeNotification
 Method that creates badge notification with type: wallet-created
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -237,7 +246,7 @@ Method that creates badge notification with type: wallet-created
 ## onWalletImportedBadgeNotification
 Method that creates badge notification with type: wallet-imported
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -248,7 +257,7 @@ Method that creates badge notification with type: wallet-imported
 ## onConnectionEstablishedBadgeNotification
 Method that creates badge notification with type: first-connection-established
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -259,7 +268,7 @@ Method that creates badge notification with type: first-connection-established
 ## onTransactionMadeBadgeNotification
 Method that creates badge notification with type: first-transaction-made
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -270,7 +279,7 @@ Method that creates badge notification with type: first-transaction-made
 ## onTransactionReceivedBadgeNotification
 Method that creates badge notification with type: first-transaction-received
 
-**Kind**: global variable
+**Kind**: global variable  
 
 | Param | Type | Description |
 | --- | --- | --- |

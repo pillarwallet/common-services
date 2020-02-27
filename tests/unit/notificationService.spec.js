@@ -32,6 +32,7 @@ describe('Notification Service', () => {
     sqsConfiguration = {
       region: 'us-east-1',
       queueUrl: 'https://sqs.us-east-1.amazonaws.com/testing/test.fifo',
+      fifoQueue: true,
     };
   });
 
@@ -48,6 +49,7 @@ describe('Notification Service', () => {
   it('should have instantiated a new aws.SQS with the correct config options', () => {
     buildNotificationService({ sqsConfiguration, dbModels: {} });
     delete sqsConfiguration.queueUrl;
+    delete sqsConfiguration.fifoQueue;
     expect(aws.SQS.mock.calls[0][0]).toEqual(sqsConfiguration);
   });
 
