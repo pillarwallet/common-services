@@ -4,4 +4,12 @@ module.exports = {
   FIRST_CONNECTION_ESTABLISHED_BADGE_TYPE: 'first-connection-established',
   FIRST_TRANSACTION_MADE_TYPE: 'first-transaction-made',
   FIRST_TRANSACTION_RECEIVED_TYPE: 'first-transaction-received',
+  EMAIL_VERIFIED_TYPE: 'email-verified',
+  PHONE_VERIFIED_TYPE: 'phone-verified',
+  REFERRAL_REWARD_RECEIVED_TYPE: 'referral-reward-received',
+  REFERRAL_INVITE_SENT_1_TYPE: 'referral-invite-sent-one',
+  REFERRAL_INVITE_SENT_5_TYPE: 'referral-invite-sent-five',
+  REFERRAL_INVITE_SENT_10_TYPE: 'referral-invite-sent-ten',
+  REFERRAL_INVITE_SENT_25_TYPE: 'referral-invite-sent-twentyfive',
+  REFERRAL_INVITE_SENT_100_TYPE: 'referral-invite-sent-hundred',
 };
