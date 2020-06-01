@@ -66,6 +66,8 @@ describe('Notification Service', () => {
     expect(typeof NotificationService.onConnectionEstablishedBadgeNotification).toBe('function');
     expect(typeof NotificationService.onTransactionMadeBadgeNotification).toBe('function');
     expect(typeof NotificationService.onTransactionReceivedBadgeNotification).toBe('function');
+    expect(typeof NotificationService.onEmailVerifiedBadgeNotification).toBe('function');
+    expect(typeof NotificationService.onPhoneVerifiedBadgeNotification).toBe('function');
   });
 
   it('should fail on invalid params, queueUrl', () => {
