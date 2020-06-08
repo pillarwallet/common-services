@@ -36,11 +36,11 @@ describe('Badges Service', () => {
     expect(typeof BadgeService.onEmailVerified).toBe('function');
     expect(typeof BadgeService.onPhoneVerified).toBe('function');
     expect(typeof BadgeService.onReferralRewardReceived).toBe('function');
-    expect(typeof BadgeService.onReferralInviteSent1).toBe('function');
-    expect(typeof BadgeService.onReferralInviteSent5).toBe('function');
-    expect(typeof BadgeService.onReferralInviteSent10).toBe('function');
-    expect(typeof BadgeService.onReferralInviteSent25).toBe('function');
-    expect(typeof BadgeService.onReferralInviteSent100).toBe('function');
+    expect(typeof BadgeService.onFirstReferralSent).toBe('function');
+    expect(typeof BadgeService.onFiveReferralsSent).toBe('function');
+    expect(typeof BadgeService.onTenReferralsSent).toBe('function');
+    expect(typeof BadgeService.onTwentyfiveReferralsSent).toBe('function');
+    expect(typeof BadgeService.onHundredReferralsSent).toBe('function');
   });
 
   it('should fail on invalid params', () => {
