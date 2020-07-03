@@ -41,6 +41,7 @@ describe('Badges Service', () => {
     expect(typeof BadgeService.onTenReferralsSent).toBe('function');
     expect(typeof BadgeService.onTwentyfiveReferralsSent).toBe('function');
     expect(typeof BadgeService.onHundredReferralsSent).toBe('function');
+    expect(typeof BadgeService.onFirstAaveDeposit).toBe('function');
   });
 
   it('should fail on invalid params', () => {

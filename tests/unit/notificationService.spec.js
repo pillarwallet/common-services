@@ -70,6 +70,7 @@ describe('Notification Service', () => {
     expect(typeof NotificationService.onPhoneVerifiedBadgeNotification).toBe('function');
     expect(typeof NotificationService.onReferralRewardReceivedBadgeNotification).toBe('function');
     expect(typeof NotificationService.onFirstReferralSentBadgeNotification).toBe('function');
+    expect(typeof NotificationService.onFirstAaveDepositBadgeNotification).toBe('function');
   });
 
   it('should fail on invalid params, queueUrl', () => {
