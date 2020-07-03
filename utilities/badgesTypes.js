@@ -12,4 +12,5 @@ module.exports = {
   TEN_REFERRALS_SENT_TYPE: 'ten-referrals-sent',
   TWENTYFIVE_REFERRALS_SENT_TYPE: 'twentyfive-referrals-sent',
   HUNDRED_REFERRALS_SENT_TYPE: 'hundred-referrals-sent',
+  FIRST_AAVE_DEPOSIT: 'first-aave-deposit',
 };
