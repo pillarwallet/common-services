@@ -24,7 +24,7 @@
   "homepage": "https://github.com/pillarwallet/common-services#readme",
   "dependencies": {
     "@pillarwallet/common-logger": "https://github.com/pillarwallet/common-logger",
-    "aws-sdk": "2.252.1",
+    "aws-sdk": "2.814.0",
     "bunyan": "1.8.12",
     "bunyan-rotating-file-stream": "1.6.3",
     "fs": "0.0.1-security",
