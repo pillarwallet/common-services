@@ -286,3 +286,4 @@ Method that creates badge notification with type: first-transaction-received
 | [wallet] | <code>Object</code> | The wallet object from the recipient user |
 
 
+test
